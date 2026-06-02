@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Application\Hl7Engine.Core.Application.csproj" />
+    <ProjectReference Include="..\..\MllpServer\IntegrationEvents\HL7Engine.Module.MllpServer.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\Domain\HL7Engine.Module.Tracking.Domain.csproj" />
+    <ProjectReference Include="..\IntegrationEvents\HL7Engine.Module.Tracking.IntegrationEvents.csproj" />
+    
+  </ItemGroup>
+
+  
+
+ 
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

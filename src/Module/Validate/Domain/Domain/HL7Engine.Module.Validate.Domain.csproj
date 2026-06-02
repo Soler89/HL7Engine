@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>HL7Engine.Module.Validate.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="NHapi.Base">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\nhapi.base\3.2.3\lib\netstandard2.0\NHapi.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Core\Application\Hl7Engine.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\Core\Infrastructure\Hl7Engine.Core.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

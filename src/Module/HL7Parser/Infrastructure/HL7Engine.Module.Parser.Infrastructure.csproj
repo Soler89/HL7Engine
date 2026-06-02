@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Hl7Engine.Module.Parser.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
+    <PackageReference Include="nhapi" Version="3.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.configuration.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.hosting.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Infrastructure\Hl7Engine.Core.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\MllpServer\IntegrationEvents\HL7Engine.Module.MllpServer.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\Application\HL7Engine.Module.Parser.Application.csproj" />
+  </ItemGroup>
+
+</Project>

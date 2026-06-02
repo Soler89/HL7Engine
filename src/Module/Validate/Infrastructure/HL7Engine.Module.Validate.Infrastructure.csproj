@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Hl7Engine.Module.Validate.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Application\Hl7Engine.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\Core\Domain\Hl7Cloud.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\HL7Parser\IntegrationEvents\HL7Engine.Module.Parser.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\Application\HL7Engine.Module.Validate.Application.csproj" />
+    <ProjectReference Include="..\Domain\Domain\HL7Engine.Module.Validate.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.configuration.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.hosting.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Base">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\nhapi.base\3.2.3\lib\netstandard2.0\NHapi.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.8" />
+    <PackageReference Include="nhapi.base" Version="3.2.3" />
+  </ItemGroup>
+
+</Project>

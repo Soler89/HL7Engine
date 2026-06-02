@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+    <PackageReference Include="nhapi.base" Version="3.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Application\Hl7Engine.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\Core\Domain\Hl7Cloud.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\MllpServer\IntegrationEvents\HL7Engine.Module.MllpServer.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\IntegrationEvents\HL7Engine.Module.Parser.IntegrationEvents.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.logging.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Base">
+      <HintPath>..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\nhapi.base\3.2.3\lib\netstandard2.0\NHapi.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

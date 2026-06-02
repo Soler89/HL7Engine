@@ -1,0 +1,26 @@
+{
+    "Serilog": {
+        "MinimumLevel": {
+            "Default": "Information"
+        },
+        "WriteTo": [
+            {
+                "Name": "Console"
+            },
+            {
+                "Name": "File",
+                "Args": {
+                    "path": "logs/hl7engine-.log",
+                    "rollingInterval": "Day"
+                }
+            }
+        ]
+    },
+    "MllpServer": {
+        "port": 2022
+    },
+    "ConnectionStrings": {
+    "Tracking": "Data Source=database/hl7engine.db"
+}
+}
+    
