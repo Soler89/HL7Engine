@@ -10,7 +10,7 @@ namespace Hl7Engine.Module.Parser.Infrastructure.Parsers;
 public class Hl7MessageParser:IMessageParser<Hl7MessageDto>
 {
     private readonly ILogger<Hl7MessageParser> _logger;
-    private readonly PipeParser _parser;
+    private readonly IParserServices _parser;
     private readonly Dictionary<string, ISegmentExtractor> _segmentExtractors;
 
     // Mapa de segmentos requeridos por tipo de mensaje
@@ -21,7 +21,7 @@ public class Hl7MessageParser:IMessageParser<Hl7MessageDto>
         // etc.
     };
 
-    public Hl7MessageParser(ILogger<Hl7MessageParser> _logger,PipeParser parser, IEnumerable<ISegmentExtractor> extractors) 
+    public Hl7MessageParser(ILogger<Hl7MessageParser> _logger,IParserServices parser, IEnumerable<ISegmentExtractor> extractors) 
     {
         this._logger = _logger;
         _parser = parser;
@@ -33,13 +33,14 @@ public class Hl7MessageParser:IMessageParser<Hl7MessageDto>
     public Hl7MessageDto Parser(byte[] mesage)
     {var dto = new Hl7MessageDto
         {
-            Format = "HL7v2"
+            Format = "HL7v2",
+            ParsedString =  _parser.GetString(mesage)
             // La mayoría de campos ya serán llenados por los extractores
         };
         try
         {
              
-            var msg = _parser.Parse(System.Text.Encoding.UTF8.GetString(mesage));
+            var msg = _parser.Parser(mesage);
              
             
 

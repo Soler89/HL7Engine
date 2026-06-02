@@ -5,6 +5,7 @@ using Hl7Engine.Core.Application.Interfaces.EventBus;
 using HL7Engine.Module.Tracking.Application.Handlers;
 using HL7Engine.Module.Tracking.Domain.Repositories;
 using HL7Engine.Module.Tracking.Infrastructure.Configuration;
+using HL7Engine.Module.Tracking.Infrastructure.EventBus;
 using HL7Engine.Module.Tracking.Infrastructure.Persistence;
 using HL7Engine.Module.Tracking.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,7 @@ public static class TrackingModuleServiceCollectionExtensions
 
         services.AddScoped<IMessageTrackingRepository, MessageTrackingRepository>();
         services.AddScoped<IIntegrationEventHandler<MessageStatusChangedIntegrationEvent>,MessageStatusChangedIntegrationEventHandler>();
+        services.AddHostedService<EventBusRegister>();
         return services;
     }
 

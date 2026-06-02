@@ -3,7 +3,7 @@ namespace Hl7Engine.Core.Application.Message.Tracking;
 public enum MessageTrackingStatus
 {
     Received,
-    Parsed,
+    ParsedSuccess,
     ValidationPassed,
     ValidationFailed,
     ParsingFailed,

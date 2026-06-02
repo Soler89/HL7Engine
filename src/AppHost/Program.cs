@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-var directoryConfiguration = $"{AppContext.BaseDirectory}/configuration/";
+var directoryConfiguration = $"{AppContext.BaseDirectory}/Configuration/";
 
 #region Configuration
  var builder = Host.CreateApplicationBuilder(args);

@@ -5,5 +5,8 @@ namespace HL7Engine.Module.Parser.Application.Interfaces;
 public interface IParserServices
 {
     IMessage Parser(byte[] data);
-  
+    string GetString(byte[] data);
+    
+
+
 }

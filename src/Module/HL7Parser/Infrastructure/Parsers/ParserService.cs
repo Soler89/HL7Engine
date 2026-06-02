@@ -12,6 +12,22 @@ public class ParserServices(PipeParser parser,IOptions<ParserConfig> config):IPa
 {
     private string Encoder { get; set; } =  "UTF-8";
 
+    public string GetString(byte[] data)
+    {
+        switch (Encoder)
+        {
+            case Encoding.UTF8:
+                return  System.Text.Encoding.UTF8.GetString(data);
+        }
+
+        return String.Empty;
+
+    }
+
+    
+
+    
+
     public IMessage Parser(byte[] data)
     {
         
@@ -30,5 +46,6 @@ public class ParserServices(PipeParser parser,IOptions<ParserConfig> config):IPa
 
     }
 
-     
+
+    
 }

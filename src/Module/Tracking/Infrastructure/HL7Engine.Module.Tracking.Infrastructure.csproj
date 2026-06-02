@@ -12,8 +12,15 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Application\Hl7Engine.Core.Application.csproj" />
+    <ProjectReference Include="..\..\HL7Parser\IntegrationEvents\HL7Engine.Module.Parser.IntegrationEvents.csproj" />
     <ProjectReference Include="..\Application\HL7Engine.Module.Tracking.Application.csproj" />
     
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\home\soler\.nuget\packages\microsoft.extensions.hosting.abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <PropertyGroup>

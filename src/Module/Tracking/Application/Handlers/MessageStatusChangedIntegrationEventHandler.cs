@@ -35,6 +35,7 @@
          Status = @event.MessageTracking.Status,
          RawBytes = @event.MessageTracking.RawBytes,
          CreatedAt = existing?.CreatedAt ?? now,
+         ParsedJson = @event.MessageTracking.ParsedString,
          LastUpdated = now
        }, default);
      }

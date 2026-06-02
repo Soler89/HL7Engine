@@ -9,7 +9,7 @@ public class MessageTrackingUpdateDto
     }
 
     public byte[]? RawBytes { get; set; }
-    public string? ParsedJson { get; set; }
+    public string? ParsedString { get; set; }
     
     
    
