@@ -1,5 +1,8 @@
-﻿using Hl7Engine.Core.Application.Interfaces.EventBus;
+﻿using Hl7Cloud.Module.Tracking.IntegrationEvents.Event;
+using Hl7Engine.Core.Application.Interfaces.EventBus;
 using Hl7Engine.Core.Application.Interfaces.Module;
+using Hl7Engine.Core.Application.Message.Dto;
+using Hl7Engine.Core.Application.Message.Tracking;
 using HL7Engine.Module.Parser.IntegrationEvents.Event;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +11,7 @@ namespace Hl7Cloud.Module.Hl7Validate.Application.Handlers;
 public class ParserSuccessIntegrationEventHandler(
   ILogger<ParserSuccessIntegrationEvent> logger,
   IEventBus eventBus,
-  IValidateMessage validateMessage) : IIntegrationEventHandler<ParserSuccessIntegrationEvent>
+  IEnumerable<IValidateMessage<MessageDto>> validateMessage) : IIntegrationEventHandler<ParserSuccessIntegrationEvent>
 {
 
 
@@ -16,9 +19,23 @@ public class ParserSuccessIntegrationEventHandler(
   public async Task Handle(ParserSuccessIntegrationEvent @event)
   {
 
+        var validateResult = await Validate(@event.MessageDto);
 
-    var validateResult = await validateMessage.ValidateAsync(@event.MessageDto);
-    if (!validateResult.IsValid)
+        var status = validateResult.IsValid ? MessageTrackingStatus.ValidationSuccess : MessageTrackingStatus.ValidationFailed;
+
+        //await eventBus.Publish(new MessageStatusChangedIntegrationEvent(@event.Id,
+        // new MessageTrackingUpdateDto() { ParsedString = @event.MessageDto. , Status = status }));
+
+        if (validateResult.IsValid)
+        { 
+        
+        
+        }
+
+       
+
+
+        if (!validateResult.IsValid)
     {
       foreach (var validateResultError in validateResult.Errors)
       {
@@ -31,4 +48,25 @@ public class ParserSuccessIntegrationEventHandler(
     }
 
   }
+
+    public async Task<ValidationResult> Validate(MessageDto message)
+    {
+        bool isValid = true;
+        List<string> allErrors = new List<string>();
+
+        foreach (var item in validateMessage)
+        {
+            ValidationResult result = await item.ValidateAsync(message);
+            isValid = isValid && result.IsValid;
+            if (!result.IsValid)
+                allErrors.AddRange(result.Errors);
+        }
+
+        
+        ValidationResult validateResult = new ValidationResult(isValid, allErrors);
+
+        return validateResult;
+
+
+    }
 }

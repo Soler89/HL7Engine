@@ -4,7 +4,7 @@ public enum MessageTrackingStatus
 {
     Received,
     ParsedSuccess,
-    ValidationPassed,
+    ValidationSuccess,
     ValidationFailed,
     ParsingFailed,
     AckGenerated

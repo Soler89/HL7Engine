@@ -7,7 +7,7 @@ using HL7Engine.Module.Validate.Domain.Entities;
 
 namespace Hl7Engine.Module.Validate.Infrastructure.Rules.HL7v2;
 
-public class Hl7ValidationModule : IValidateMessage
+public class Hl7ValidationModule : IValidateMessage<MessageDto>
 {
     private readonly ValidationRulesRepository? _rules;
 
@@ -40,11 +40,11 @@ public class Hl7ValidationModule : IValidateMessage
 
     
 
-    public Task<ValidationResult> ValidateAsync(MessageDto message)
+    
+
+    Task<ValidationResult> IValidateMessage<MessageDto>.ValidateAsync(MessageDto message)
     {
         var errors = _rules?.Validate(message).ToList();
         return Task.FromResult(new ValidationResult(errors.Count == 0, errors));
     }
-
- 
 }
