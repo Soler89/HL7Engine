@@ -5,7 +5,7 @@ namespace Hl7Cloud.Module.Hl7Validate.Application
     /// <summary>
     /// Servicio de validación de mensajes clínicos parseados.
     /// </summary>
-    public interface IValidateMessage
+    public interface IValidateMessage<in T>  where T : MessageDto
     {
         /// <summary>
         /// Valida un mensaje clínico y devuelve un resultado con los errores encontrados.
@@ -13,7 +13,7 @@ namespace Hl7Cloud.Module.Hl7Validate.Application
         /// <param name="message">Mensaje parseado a validar.</param>
         /// <param name="connectionId">ID de conexión para trazabilidad.</param>
         /// <returns>Resultado de la validación con indicador de éxito y lista de errores.</returns>
-        Task<ValidationResult> ValidateAsync(MessageDto message);
+        Task<ValidationResult> ValidateAsync(T message);
     }
 
     /// <summary>
