@@ -12,7 +12,7 @@ namespace HL7Engine.Module.Parser.Application.Handlers;
 
 public class MllpMessageIncomingIntegrationEventHandler(
   ILogger<MllpMessageIncomingIntegrationEventHandler> logger,
-  IMessageParser<Hl7MessageDto> parserService,
+  IMessageParser<MessageDto> parserService,
   IEventBus eventBus) : IIntegrationEventHandler<MllpMessageIncomingIntegrationEvent>
 {
 
@@ -30,7 +30,7 @@ public class MllpMessageIncomingIntegrationEventHandler(
     var status = parsedMessage.IsValid ? MessageTrackingStatus.ParsedSuccess : MessageTrackingStatus.ParsingFailed;
   
     await eventBus.Publish(new MessageStatusChangedIntegrationEvent(@event.Id,
-      new MessageTrackingUpdateDto() { ParsedString =parsedMessage.ParsedString,  RawBytes = @event.RawHl7 ,Status = status}));
+      new MessageTrackingUpdateDto() { MessageString =parsedMessage.MessageString,  RawBytes = @event.RawHl7 ,Status = status}));
 
     
     if (parsedMessage.IsValid == true)

@@ -3,7 +3,7 @@ namespace Hl7Engine.Core.Application.Message.Dto;
 /// <summary>
 /// DTO que contiene toda la información extraída de un mensaje HL7v2.
 /// </summary>
-public  abstract class MessageDto 
+public   class MessageDto 
 {
     private readonly Dictionary<string, string> _fields = new(StringComparer.OrdinalIgnoreCase);
     private readonly List<string> _segments = new();
@@ -26,6 +26,8 @@ public  abstract class MessageDto
     public bool HasField(string key) => _fields.ContainsKey(key);
     public bool HasSegments(string key) => _segments.Contains(key);
     public string? GetField(string key) => _fields.TryGetValue(key, out var val) ? val : null;
+
+    public string MessageString { get; set; }
 
     // Propiedades de solo lectura opcionales para consultas externas
     public IReadOnlyDictionary<string, string> Fields => _fields;

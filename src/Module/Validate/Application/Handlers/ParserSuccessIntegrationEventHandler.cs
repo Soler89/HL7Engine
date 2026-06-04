@@ -23,8 +23,8 @@ public class ParserSuccessIntegrationEventHandler(
 
         var status = validateResult.IsValid ? MessageTrackingStatus.ValidationSuccess : MessageTrackingStatus.ValidationFailed;
 
-        //await eventBus.Publish(new MessageStatusChangedIntegrationEvent(@event.Id,
-        // new MessageTrackingUpdateDto() { ParsedString = @event.MessageDto. , Status = status }));
+        await eventBus.Publish(new MessageStatusChangedIntegrationEvent(@event.Id,
+          new MessageTrackingUpdateDto() { Status = status,Errors = validateResult.Errors }));
 
         if (validateResult.IsValid)
         { 

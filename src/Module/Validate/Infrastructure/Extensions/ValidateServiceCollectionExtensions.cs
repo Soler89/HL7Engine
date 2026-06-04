@@ -7,6 +7,7 @@ using Hl7Engine.Module.Validate.Infrastructure.EventBus;
 using Hl7Engine.Module.Validate.Infrastructure.Rules.HL7v2;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Hl7Engine.Core.Application.Message.Dto;
 
 namespace Hl7Engine.Module.Validate.Infrastructure.Extensions;
 
@@ -17,7 +18,7 @@ public static class ValidateServiceCollectionExtensions
         IConfiguration configuration)
     {
          
-        services.AddSingleton<IValidateMessage , Hl7ValidationModule>();
+        services.AddSingleton<IValidateMessage<MessageDto> , Hl7ValidationModule>();      
         services.AddSingleton<IIntegrationEventHandler<ParserSuccessIntegrationEvent>, ParserSuccessIntegrationEventHandler>();
          
         services.AddHostedService<EventBusRegister>();

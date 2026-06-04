@@ -38,7 +38,7 @@ public static class ParserServiceCollectionExtensions
         services.AddSingleton<ISegmentExtractor, PidExtractor>();
 
         Console.WriteLine("Hl7MessageParser");
-        services.AddSingleton<IMessageParser<Hl7MessageDto>, Hl7MessageParser>();
+        services.AddSingleton<IMessageParser<MessageDto>, Hl7MessageParser>();
         services.AddSingleton<IIntegrationEventHandler<MllpMessageIncomingIntegrationEvent>, MllpMessageIncomingIntegrationEventHandler>();
         services.AddHostedService<EventBus.EventBusRegister>();
         return services;

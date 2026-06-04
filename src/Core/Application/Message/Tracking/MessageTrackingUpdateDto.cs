@@ -9,8 +9,10 @@ public class MessageTrackingUpdateDto
     }
 
     public byte[]? RawBytes { get; set; }
-    public string? ParsedString { get; set; }
-    
-    
-   
+    public string? MessageString { get; set; }
+
+    public IReadOnlyCollection<string>? Errors { get; set; } = new List<string>();
+
+
+
 }

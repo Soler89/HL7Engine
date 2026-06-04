@@ -7,7 +7,7 @@ using NHapi.Base.Util;
 
 namespace Hl7Engine.Module.Parser.Infrastructure.Parsers;
 
-public class Hl7MessageParser:IMessageParser<Hl7MessageDto>
+public class Hl7MessageParser:IMessageParser<MessageDto>
 {
     private readonly ILogger<Hl7MessageParser> _logger;
     private readonly IParserServices _parser;
@@ -30,11 +30,11 @@ public class Hl7MessageParser:IMessageParser<Hl7MessageDto>
 
      
     
-    public Hl7MessageDto Parser(byte[] mesage)
-    {var dto = new Hl7MessageDto
-        {
+    public MessageDto Parser(byte[] mesage)
+    {var dto = new MessageDto
+    {
             Format = "HL7v2",
-            ParsedString =  _parser.GetString(mesage)
+            MessageString =  _parser.GetString(mesage)
             // La mayoría de campos ya serán llenados por los extractores
         };
         try
