@@ -16,7 +16,7 @@ public static class CoreConfigurateExtensions
     {
         
       //  services.AddSingleton<ISocketStore, SocketStore.SocketStore>();
-        services.AddSingleton<IEventBus, InMemoryEventBus>();
+        services.AddSingleton<IEventBus, ChannelEventBus>();
         return services;
     }
 }
