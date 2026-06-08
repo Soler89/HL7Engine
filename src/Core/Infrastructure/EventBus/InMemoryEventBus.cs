@@ -3,7 +3,7 @@ using Hl7Engine.Core.Application.Interfaces.EventBus;
 
 namespace Hl7Engine.Core.Infrastructure.EventBus
 {
-    public sealed class InMemoryEventBus:IEventBus
+    public sealed class InMemoryEventBus : IEventBus
     {
         static InMemoryEventBus()
         {
@@ -18,7 +18,6 @@ namespace Hl7Engine.Core.Infrastructure.EventBus
         {
 
             var eventType = typeof(T).FullName;
-            Console.WriteLine(eventType);
             if (eventType != null)
             {
                 var bag = _handlersDictionary.GetOrAdd(eventType, _ => new ConcurrentBag<IIntegrationEventHandler>());
@@ -44,13 +43,8 @@ namespace Hl7Engine.Core.Infrastructure.EventBus
                 return;
             }
 
-            foreach (var integrationEventHandler in integrationEventHandlers)
-            {
-                if (integrationEventHandler is IIntegrationEventHandler<T> handler)
-                {
-                    await handler.Handle(@event);
-                }
-            }
+            var tasks = integrationEventHandlers.OfType<IIntegrationEventHandler<T>>().Select(m => m.Handle(@event));
+            await Task.WhenAll(tasks);
         }
     }
 }
