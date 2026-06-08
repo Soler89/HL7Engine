@@ -22,10 +22,10 @@
 
      public async Task Handle(MessageStatusChangedIntegrationEvent @event)
      {
-       logger.LogInformation("Received Integration Event: {IntegrationEventId}", @event.Id);
-      
-       
-       var existing = await repository.GetByIdAsync(@event.Id, default);
+
+        logger.LogDebug("Processing status change for event {EventId}", @event.Id);
+
+    var existing = await repository.GetByIdAsync(@event.Id, default);
        var now = DateTimeOffset.UtcNow;
 
        await repository.InsertOrUpdateAsync(new MessageTracking
@@ -39,7 +39,9 @@
          ErrorsJson = @event.MessageTracking?.Errors?.Count> 0 ? JsonSerializer.Serialize(@event.MessageTracking.Errors) : null,
            LastUpdated = now
        }, default);
-     }
+
+        logger.LogInformation("Event {EventId} status changed to {NewStatus} and persisted", @event.Id, @event.MessageTracking?.Status);
+    }
    }
    
    
