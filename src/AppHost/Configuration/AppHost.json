@@ -1,8 +1,12 @@
 {
     "Serilog": {
-        "MinimumLevel": {
-            "Default": "Information"
-        },
+      "MinimumLevel": {
+        "Default": "Information",
+        "Override": {
+          "Microsoft.EntityFrameworkCore": "Error",
+          "Microsoft.EntityFrameworkCore.Database.Command": "Error"
+        }
+      },
         "WriteTo": [
             {
                 "Name": "Console"
