@@ -51,9 +51,14 @@ public class ParserSuccessIntegrationEventHandler(
 
     public async Task<ValidationResult> Validate(MessageDto message)
     {
-        bool isValid = true;
-        List<string> allErrors = new List<string>();
+        var taskResult = await Task.WhenAll(validateMessage.Select(handler => handler.ValidateAsync(message)));
+                
+        bool isValid = taskResult.All(m=>m.IsValid == true);
+        List<string>  allErrors = taskResult.Where(v=>v.IsValid==false).SelectMany(v=>v.Errors).ToList();
 
+
+        
+        /*
         foreach (var item in validateMessage)
         {
             ValidationResult result = await item.ValidateAsync(message);
@@ -61,7 +66,7 @@ public class ParserSuccessIntegrationEventHandler(
             if (!result.IsValid)
                 allErrors.AddRange(result.Errors);
         }
-
+        */
         
         ValidationResult validateResult = new ValidationResult(isValid, allErrors);
 
