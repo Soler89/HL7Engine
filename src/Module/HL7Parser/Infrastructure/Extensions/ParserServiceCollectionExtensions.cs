@@ -33,11 +33,11 @@ public static class ParserServiceCollectionExtensions
         services.AddSingleton<PipeParser>();
 
         services.AddSingleton<IParserServices, ParserServices>();
-        Console.WriteLine("ISegmentExtractor");
+       
         services.AddSingleton<ISegmentExtractor, MshExtractor>();
         services.AddSingleton<ISegmentExtractor, PidExtractor>();
 
-        Console.WriteLine("Hl7MessageParser");
+       
         services.AddSingleton<IMessageParser<MessageDto>, Hl7MessageParser>();
         services.AddSingleton<IIntegrationEventHandler<MllpMessageIncomingIntegrationEvent>, MllpMessageIncomingIntegrationEventHandler>();
         services.AddHostedService<EventBus.EventBusRegister>();
