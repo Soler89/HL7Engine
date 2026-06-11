@@ -1,5 +1,7 @@
 ﻿using Hl7Engine.Core.Application.Interfaces.EventBus;
+using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Threading.Channels;
 
 public sealed class ChannelEventBus : IEventBus, IDisposable
@@ -8,8 +10,9 @@ public sealed class ChannelEventBus : IEventBus, IDisposable
     private readonly Channel<IntegrationEvent> _channel;
     private readonly CancellationTokenSource _cts;
     private readonly Task _worker;
+    private readonly ILogger<ChannelEventBus> logger;
 
-    public ChannelEventBus()
+    public ChannelEventBus(ILogger<ChannelEventBus> logger)
     {
         // Canal con capacidad 1000, comportamiento "esperar" cuando está lleno
         var options = new BoundedChannelOptions(1000)
@@ -19,6 +22,7 @@ public sealed class ChannelEventBus : IEventBus, IDisposable
         _channel = Channel.CreateBounded<IntegrationEvent>(options);
         _cts = new CancellationTokenSource();
         _worker = Task.Run(ProcessEventsAsync);
+        this.logger = logger;
     }
 
     public void Subscribe<T>(IIntegrationEventHandler<T> handler) where T : IntegrationEvent
@@ -52,13 +56,25 @@ public sealed class ChannelEventBus : IEventBus, IDisposable
         if (eventType == null) return;
         if (!_handlers.TryGetValue(eventType, out var handlers)) return;
 
-        // Ejecuta todos los handlers en paralelo (Task.WhenAll)
-        var tasks = handlers
-            .OfType<dynamic>()  // O usa reflexión/patrón visitor
-            .Select(h => ((dynamic)h).Handle((dynamic)@event))
-            .Cast<Task>();
+        var sw = Stopwatch.StartNew();
+        try
+        {
+            var tasks = handlers
+                .OfType<dynamic>()
+                .Select(h => ((dynamic)h).Handle((dynamic)@event))
+                .Cast<Task>();
 
-        await Task.WhenAll(tasks).ConfigureAwait(false);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+        }
+        finally
+        {
+            sw.Stop();
+            logger.LogInformation(
+                "Evento {Event} despachado a {HandlerCount} handlers en {ElapsedMs} ms",
+                eventType,
+                handlers.Count,                
+                sw.ElapsedMilliseconds);
+        }
     }
 
     public void Dispose()
